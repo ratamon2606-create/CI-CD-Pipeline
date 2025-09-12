@@ -7,6 +7,7 @@ COPY . .
 FROM node:18-alpine
 RUN adduser --system --no-create-home myuser
 USER myuser
-COPY --from=builder /app /app
+COPY --from=builder --chown=myuser:myuser /app /app
+WORKDIR /app
 EXPOSE 3000
 CMD ["node", "app.js"]
