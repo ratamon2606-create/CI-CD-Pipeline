@@ -17,6 +17,26 @@ flowchart TD
     F -->|No| H[CI Complete]
 ```
 
+## CI/CD Verification
+
+### GitHub Actions — Successful Pipeline
+
+![GitHub Actions Success](docs/images/github-actions-success.png)
+
+The workflow runs automated HTTP tests, builds the
+Docker image, and verifies the application's health
+endpoint before publishing.
+
+### Docker Hub — Published Images
+
+![Docker Hub Published Images](docs/images/dockerhub-published.png)
+
+After successful validation on the main branch,
+the pipeline automatically publishes Docker images
+to [Docker Hub](https://hub.docker.com/r/tcrose/ci-cd-pipeline)
+using both `latest` and commit SHA tags.
+
+
 ## Tech Stack
 
 - Node.js
