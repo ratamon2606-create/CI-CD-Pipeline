@@ -39,8 +39,8 @@ jobs:
           trap 'docker rm -f app-smoke || true' EXIT
 
           for i in $(seq 1 30); do
-            if curl -fsS \
-              http://127.0.0.1:3001/health; then
+            if curl -fsS http://127.0.0.1:3001/health \
+              | grep -Fq '{"status":"ok"}'; then
               echo "Smoke test passed"
               exit 0
             fi
