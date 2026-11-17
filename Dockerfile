@@ -1,13 +1,14 @@
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
+FROM node:24-alpine
 
-FROM node:18-alpine
-RUN adduser --system --no-create-home myuser
-USER myuser
-COPY --from=builder --chown=myuser:myuser /app /app
 WORKDIR /app
+ENV NODE_ENV=production
+
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+COPY --chown=node:node app.js ./
+
+USER node
 EXPOSE 3000
+
 CMD ["node", "app.js"]
